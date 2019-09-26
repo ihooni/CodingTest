@@ -37,13 +37,20 @@ class Graph {
 vector<int> dist;
 vector<int> from;
 
+/**
+ * Core of bellman ford algorithm.
+ *
+ * @param g
+ */
 void bellmanFord(Graph* g) {
-  int isChange;
-
+  int isUpdated;
   int oldDist, newDist;
-  do {
-    isChange = 0;
 
+  // until distances are not updated
+  do {
+    isUpdated = 0;
+
+    // for all edges
     for (auto edge : g->edges) {
       oldDist = dist[edge.dest];
       newDist = dist[edge.src] + edge.weight;
@@ -52,10 +59,10 @@ void bellmanFord(Graph* g) {
         dist[edge.dest] = newDist;
         from[edge.dest] = edge.src;
 
-        isChange = 1;
+        isUpdated = 1;
       }
     }
-  } while(isChange);
+  } while(isUpdated);
 }
 
 int main() {
